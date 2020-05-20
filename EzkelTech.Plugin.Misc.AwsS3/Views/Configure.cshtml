@@ -1,0 +1,87 @@
+﻿@model EzkelTech.Plugin.Misc.AwsS3.Models.ConfigurationModel
+
+@inject Nop.Core.IWebHelper webHelper
+
+@{
+    Layout = "_ConfigurePlugin";
+}
+
+<form asp-controller="EzkelTechAwsS3" asp-action="Configure" method="post">
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="Region" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="Region" />
+                        <span asp-validation-for="Region"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="Bucket" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="Bucket" />
+                        <span asp-validation-for="Bucket"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="AccessKeyId" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="AccessKeyId" />
+                        <span asp-validation-for="AccessKeyId"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="SecretAccessKey" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="SecretAccessKey" />
+                        <span asp-validation-for="SecretAccessKey"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <nop-label asp-for="ObjectUrlTemplate" />
+                    </div>
+                    <div class="col-md-9">
+                        <nop-editor asp-for="ObjectUrlTemplate" />
+                        <span asp-validation-for="ObjectUrlTemplate"></span>
+                        <a target="_blank" href="#" id="s3Url"></a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-9 col-md-offset-3">
+                        <input type="submit" name="save" class="btn bg-primary" value="@T("Admin.Common.Save")" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('#@Html.IdFor(model => model.Bucket)').change(generateS3Link);
+        $('#@Html.IdFor(model => model.Region)').change(generateS3Link);
+        $('#@Html.IdFor(model => model.ObjectUrlTemplate)').change(generateS3Link);
+
+        generateS3Link();
+    });
+    function generateS3Link() {
+        var bucket = $('#@Html.IdFor(model => model.Bucket)').val();
+        var region = $('#@Html.IdFor(model => model.Region)').val();
+        var template = $('#@Html.IdFor(model => model.ObjectUrlTemplate)').val()
+            .replace('$Region$', region)
+            .replace('$Bucket$', bucket)
+            .replace('$fileName$', 'example_photo.jpg');
+
+        $('#s3Url').attr('href', template).text(template);
+    }
+</script>

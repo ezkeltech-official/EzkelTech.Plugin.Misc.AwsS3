@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Misc",
+  "FriendlyName": "EzkelTech AwsS3",
+  "SystemName": "EzkelTech.AwsS3",
+  "Version": "1.00",
+  "SupportedVersions": [ "4.30" ],
+  "Author": "EzkelTech",
+  "DisplayOrder": 1,
+  "FileName": "EzkelTech.Plugin.Misc.AwsS3.dll",
+  "Description": "Store nopCommerce images into Amazon S3 cloud"
+}
