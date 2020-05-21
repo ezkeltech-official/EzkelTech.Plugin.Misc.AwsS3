@@ -32,7 +32,6 @@ namespace EzkelTech.Plugin.Misc.AwsS3.Services
         private readonly IStaticCacheManager _staticCacheManager;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly EzkelTechAwsS3Settings _awsS3Settings;
-        private bool _isisposed;
         #endregion
 
         #region Ctor
